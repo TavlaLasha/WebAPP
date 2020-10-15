@@ -1,66 +1,64 @@
 <?php
-    include "dbconnect.php"
+    include "db.php";
+    $words = selectAll();
+
+    if(isset($_POST['add'])){
+        unset($_POST['add']);
+        addWord($_POST);
+        header("Refresh:0");
+    }
+    elseif(isset($_POST['edit'])){
+        unset($_POST['edit']);
+        updateWord($_POST);
+        header("Refresh:0");
+    }
+    elseif(isset($_POST['remove'])){
+        unset($_POST['remove']);
+        removeWord($_POST['id']);
+        header("Refresh:0");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <title>Document</title>
 </head>
 <body>
     <h2>Translate</h2>
     <div id="container">
         <div id="nav">
-            <input type="button" name="add" value="Add"><br>
-            <input type="button" name="edit" value="Edit"><br>
-            <input type="button" name="test" value="Test"><br>
+            <input type="button" name="add" value="Add" onclick="location.href='index.php?cat=add';"><br><br>
+            <!-- <input type="button" name="edit" value="Edit" onclick="location.href='edit.php';"><br><br> -->
+            <input type="button" name="test" value="Test" onclick="location.href='test.php';"><br>
         </div>
         <div id="info">
-            <?php
-                for($i=0; $i<=30; $i++){
-                    echo $i;
-                    echo"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' name='edit' value='Edit'><br><br>";
-                }
+            <?php foreach($words as $word): 
+                    echo $word["eng_ver"]." &#10143; ". $word["ge_ver"];
+                    ?>
+                    <input type="button" name="edit" value="Edit" onclick="location.href='index.php?id=<?=$word['id'];?>';"><br><br>
+            <?php endforeach;
+            if(isset($_GET['cat']) && $_GET['cat']="add"){
+                include "add.php";
+                echo("<script>
+                    var element = document.getElementById('info');
+                    element.scrollTop=element.scrollHeight;
+                 </script>");
+            }
+            if(isset($_GET['id'])){
+                $word = selectOne($_GET['id']);
+
+                include "edit.php";
+                echo("<script>
+                    var element = document.getElementById('info');
+                    element.scrollTop=element.scrollHeight;
+                 </script>");
+            }
             ?>
         </div>
     </div>
-    <?php
-
-    // $stmt = $conn->prepare("SELECT * FROM base");
-    // $stmt->execute();
-    // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    // $data = $stmt->fetchAll();
-    // print_r($data);
-    // echo "<hr>";
-    // for($i=0; $i<count($data); $i++){
-    //     print_r($data[$i]['pass']);
-    //     echo "<br>";
-    // }
-    //print_r($data[0]);
-
-
-    // $stmt = $conn->prepare("INSERT INTO base (eng_ver, ge_ver) 
-    //                 VALUES (:eng_ver, :ge_ver)");
-    // $stmt->bindParam(':email', $email);
-    // $stmt->bindParam(':pass', $pass);
-    // $stmt->bindParam(':created_at', $created_at);
-    // $email = "jimi@example.com";
-    // $created_at = date('2020-10-01');
-    // $stmt->execute();
-    // $last_id = $conn->lastInsertId();
-    // echo "New record created successfully. Last inserted ID is: " . $last_id;
-    // $email="user@gau.ge";
-    // $sql = "INSERT INTO user (email, pass) VALUES ('$email', '123')";
-    // $conn->exec($sql);
-    // //$conn->exec($sql);
-    // $last_id = $conn->lastInsertId();
-    // echo "New record created successfully. Last inserted ID is: " . $last_id;
-
-
-    $conn = null;
-
-    ?>
 </body>
 </html>
