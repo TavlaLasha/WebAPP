@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2020 at 04:05 PM
+-- Generation Time: Oct 09, 2020 at 11:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -33,20 +33,6 @@ CREATE TABLE `base` (
   `eng_ver` varchar(50) NOT NULL,
   `ge_ver` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `base`
---
-
-INSERT INTO `base` (`id`, `eng_ver`, `ge_ver`) VALUES
-(1, 'Book', 'წიგნი'),
-(2, 'Spoon', 'კოვზი'),
-(3, 'Rule', 'წესი'),
-(5, 'Ruler', 'სახაზავი'),
-(6, 'Pen', 'კალამი'),
-(7, 'Headphones', 'ყურსასმენები'),
-(8, 'Glue', 'წებო'),
-(9, 'Key', 'გასაღები');
 
 -- --------------------------------------------------------
 
@@ -86,7 +72,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT for table `base`
 --
 ALTER TABLE `base`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tests`
