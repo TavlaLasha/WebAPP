@@ -42,4 +42,24 @@
         $stmt = $conn->prepare("DELETE FROM base WHERE id=$id");
         $stmt->execute();
     }
+    function checkAnswers($data){
+        $score=0;
+        $rand = $data['rand'];
+        // unset($data["rand"]);
+        print_r($rand);
+        // foreach($data as $key => $d){
+        //     if($key == $rand){
+        //         $score++;
+        //     }
+        // }
+    }
+    function addResult($data, $score){
+        global $conn;
+
+        $stmt = $conn->prepare("INSERT INTO base (eng_ver, ge_ver) 
+        VALUES (:eng_ver, :ge_ver)");
+        $stmt->bindParam(':eng_ver', $data["eng"]);
+        $stmt->bindParam(':ge_ver', $data["geo"]);
+        $stmt->execute();
+    }
 ?>
