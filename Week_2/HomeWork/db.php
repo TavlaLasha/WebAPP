@@ -53,13 +53,18 @@
         }
         return $score;
     }
-    function addResult($data, $score){
+    function addResult($start_date, $end_date, $score, $duration){
         global $conn;
 
-        $stmt = $conn->prepare("INSERT INTO base (eng_ver, ge_ver) 
-        VALUES (:eng_ver, :ge_ver)");
-        $stmt->bindParam(':eng_ver', $data["eng"]);
-        $stmt->bindParam(':ge_ver', $data["geo"]);
+        $std = $start_date->format('Y-m-d H:i:s');
+        $end = $end_date->format('Y-m-d H:i:s');
+        
+        $stmt = $conn->prepare("INSERT INTO tests (start_time, end_time, duration, score) 
+        VALUES (:start_time, :end_time, :duration, :score)");
+        $stmt->bindParam(':start_time', $std);
+        $stmt->bindParam(':end_time', $end);
+        $stmt->bindParam(':duration', $duration);
+        $stmt->bindParam(':score', $score);
         $stmt->execute();
     }
 ?>

@@ -1,8 +1,5 @@
 <?php
-    // $startTime = microtime(true);
-    $startTime = new DateTime(strtotime(date("Y-m-d H:i:sa")), new DateTimeZone('Asia/Tbilisi'));
     include "db.php";
-    
     
     $words = selectAll();
     $randWordIds=array();
@@ -18,14 +15,11 @@
         unset($_POST['submit']);
         
         if(isset($_POST) && 0 !== count($_POST)){
+            $startTime = $_POST['stTime'];
+            unset($_POST['stTime']);
             $score = checkAnswers($_POST, $randAnswers);
-            $endTime = new DateTime(strtotime(date("Y-m-d H:i:sa")), new DateTimeZone('Asia/Tbilisi'));
-            echo($endTime);
-            // $interval = $startTime->diff($endTime);
-            // $hours   = $interval->format('%h'); 
-            // $minutes = $interval->format('%i');
-            // echo  'Test Lasted: '.($hours * 60 + $minutes). ' minutes<br>';
-            // echo('Score: '.$score.'/5');
+            $endTime = date('Y-m-d H:i:s');
+            header('location: results.php?score='.$score.'&stTime='.$startTime.'&edTime='.$endTime);
         }
         else{
             echo('<style type="text/css">
@@ -53,7 +47,7 @@
             <a href="index.php" style="text-decoration:none; color:black; font-size:30px; float:left; position:relative; top:-20px; left:-10px">&#10006;</a>
             <p>მონიშნეთ შემდეგი სიტყვების სწორი განმარტებები</p>
 
-            <form action="test.php" method="post">
+            <form action="" method="post">
                 <?php
                 for($i=0; $i<=4; $i++):
                     $cat = $randAnswers[$randWordIds[$i]];
@@ -76,6 +70,7 @@
                             <label for="<?=$randA[$k];?>"><?=$randA[$k];?></label><br>
                     <?php endfor;?><br>
                 <?php endfor;?><br>
+                <input type="hidden" name="stTime" value="<?=date('Y-m-d H:i:s'); ?>">
                 <input type="submit" name="submit" value="Submit">
             </form>
         </div>
