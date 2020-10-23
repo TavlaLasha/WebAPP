@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2020 at 04:05 PM
+-- Generation Time: Oct 23, 2020 at 01:28 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -56,11 +56,18 @@ INSERT INTO `base` (`id`, `eng_ver`, `ge_ver`) VALUES
 
 CREATE TABLE `tests` (
   `id` int(11) NOT NULL,
-  `start_time` date NOT NULL,
-  `end_time` date NOT NULL,
-  `duration` int(10) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `duration` varchar(50) NOT NULL,
   `score` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tests`
+--
+
+INSERT INTO `tests` (`id`, `start_time`, `end_time`, `duration`, `score`) VALUES
+(10, '2020-10-23 15:15:16', '2020-10-23 15:18:30', '3 Minutes-14 Seconds', 1);
 
 --
 -- Indexes for dumped tables
@@ -92,7 +99,7 @@ ALTER TABLE `base`
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
