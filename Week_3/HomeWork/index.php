@@ -1,15 +1,15 @@
 <?php
     include "db.php";
-    $words = selectAll();
+    $texts = selectAll("tests");
 
     if(isset($_POST['add'])){
         unset($_POST['add']);
-        addWord($_POST);
+        addTest($_POST);
         header("Refresh:0");
     }
     elseif(isset($_POST['edit'])){
         unset($_POST['edit']);
-        updateWord($_POST);
+        updateTest($_POST);
         header("Refresh:0");
     }
     elseif(isset($_POST['remove'])){
@@ -28,7 +28,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Translate</h2>
+    <h2>Tests</h2>
     <div id="container">
         <div id="nav">
             <input type="button" name="add" value="Add" onclick="location.href='index.php?cat=add';"><br><br>
@@ -36,10 +36,10 @@
             <input type="button" name="test" value="Test" onclick="location.href='test.php';"><br>
         </div>
         <div id="info">
-            <?php foreach($words as $word): 
-                    echo $word["eng_ver"]." &#10143; ". $word["ge_ver"];
+            <?php foreach($texts as $text): 
+                    echo $text["text"];
                     ?>
-                    <input type="button" name="edit" value="Edit" onclick="location.href='index.php?id=<?=$word['id'];?>';"><br><br>
+                    <input type="button" name="edit" value="Edit" onclick="location.href='index.php?id=<?=$text['id'];?>';"><br><br>
             <?php endforeach;
             if(isset($_GET['cat']) && $_GET['cat']="add"){
                 include "add.php";
@@ -49,7 +49,7 @@
                  </script>");
             }
             if(isset($_GET['id'])){
-                $word = selectOne($_GET['id']);
+                $text = selectOne($_GET['id']);
 
                 include "edit.php";
                 echo("<script>
