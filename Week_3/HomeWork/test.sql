@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2020 at 01:28 PM
+-- Generation Time: Oct 24, 2020 at 09:01 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -19,34 +19,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `translate`
+-- Database: `test`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `base`
+-- Table structure for table `done_tests`
 --
 
-CREATE TABLE `base` (
+CREATE TABLE `done_tests` (
   `id` int(11) NOT NULL,
-  `eng_ver` varchar(50) NOT NULL,
-  `ge_ver` varchar(50) NOT NULL
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `duration` varchar(50) NOT NULL,
+  `score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `base`
+-- Dumping data for table `done_tests`
 --
 
-INSERT INTO `base` (`id`, `eng_ver`, `ge_ver`) VALUES
-(1, 'Book', 'წიგნი'),
-(2, 'Spoon', 'კოვზი'),
-(3, 'Rule', 'წესი'),
-(5, 'Ruler', 'სახაზავი'),
-(6, 'Pen', 'კალამი'),
-(7, 'Headphones', 'ყურსასმენები'),
-(8, 'Glue', 'წებო'),
-(9, 'Key', 'გასაღები');
+INSERT INTO `done_tests` (`id`, `start_time`, `end_time`, `duration`, `score`) VALUES
+(1, '2020-10-23 17:34:59', '2020-10-23 17:35:03', '4 Seconds', 2);
 
 -- --------------------------------------------------------
 
@@ -56,27 +51,30 @@ INSERT INTO `base` (`id`, `eng_ver`, `ge_ver`) VALUES
 
 CREATE TABLE `tests` (
   `id` int(11) NOT NULL,
-  `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
-  `duration` varchar(50) NOT NULL,
-  `score` int(10) NOT NULL
+  `text` text NOT NULL,
+  `answer` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`id`, `start_time`, `end_time`, `duration`, `score`) VALUES
-(10, '2020-10-23 15:15:16', '2020-10-23 15:18:30', '3 Minutes-14 Seconds', 1);
+INSERT INTO `tests` (`id`, `text`, `answer`) VALUES
+(1, 'lasha aris programisti', 1),
+(3, 'PHP is very important', 1),
+(4, 'Corona Virus is very bad', 1),
+(5, 'You don\'t need microphone to attend online lectures', 0),
+(6, 'Quiz is tomorrow', 1),
+(7, 'OOP is very easy', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `base`
+-- Indexes for table `done_tests`
 --
-ALTER TABLE `base`
+ALTER TABLE `done_tests`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -90,16 +88,16 @@ ALTER TABLE `tests`
 --
 
 --
--- AUTO_INCREMENT for table `base`
+-- AUTO_INCREMENT for table `done_tests`
 --
-ALTER TABLE `base`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `done_tests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
