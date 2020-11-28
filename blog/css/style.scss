@@ -1,0 +1,46 @@
+header{
+  background-color: beige;
+  height: 120px;
+}
+
+footer{
+  background-color: beige;
+  height: 50px;
+  text-align: center;
+}
+
+.nav-left{
+  a {
+    background-color: beige;
+    border-bottom: solid silver 1px;
+
+    &:hover {
+      background-color: aquamarine;
+    }
+  }
+}
+
+.article {
+  border: solid silver 1px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#auth-form {
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+  padding: 0;
+}
+#auth-form .input-group {margin-bottom: 10px;}
+#auth-form .panel-body {text-align: center;}
+
+.error1{
+  margin-left: 10px;
+  color: red;
+}
